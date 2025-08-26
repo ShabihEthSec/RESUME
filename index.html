@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mohd Shabihul Hasan Khan - CV</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="50" cy="10" r="0.5" fill="rgba(255,255,255,0.05)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .name {
+            font-size: 2.5em;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .contact-info {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .contact-info span {
+            margin: 0 10px;
+        }
+
+        .main-content {
+            padding: 40px 30px;
+        }
+
+        .section {
+            margin-bottom: 35px;
+        }
+
+        .section-title {
+            font-size: 1.4em;
+            font-weight: 700;
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(90deg, #e74c3c, #f39c12);
+        }
+
+        .summary {
+            font-size: 1.05em;
+            line-height: 1.7;
+            color: #555;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #3498db;
+        }
+
+        .experience-item {
+            margin-bottom: 25px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid #e74c3c;
+        }
+
+        .job-title {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .company-date {
+            color: #7f8c8d;
+            font-size: 0.95em;
+            margin-bottom: 10px;
+        }
+
+        .job-description ul {
+            margin-left: 20px;
+        }
+
+        .job-description li {
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .skill-category {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #f39c12;
+        }
+
+        .skill-category h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .skill-category ul {
+            list-style: none;
+        }
+
+        .skill-category li {
+            padding: 5px 0;
+            color: #555;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .skill-category li::before {
+            content: '▸';
+            color: #3498db;
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        .certification-item {
+            margin-bottom: 15px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #27ae60;
+        }
+
+        .cert-title {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .cert-link {
+            color: #3498db;
+            text-decoration: none;
+            font-size: 0.9em;
+            word-break: break-all;
+        }
+
+        .cert-link:hover {
+            text-decoration: underline;
+        }
+
+        .education-item {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #9b59b6;
+        }
+
+        .degree {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .college {
+            color: #7f8c8d;
+            font-style: italic;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+        }
+
+        .project-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #e67e22;
+        }
+
+        .project-name {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .project-tech {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            font-style: italic;
+        }
+
+        .links-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .link-item {
+            background: #3498db;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+        }
+
+        .link-item:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+        }
+
+        .language-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #1abc9c;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                border-radius: 10px;
+            }
+
+            .header {
+                padding: 30px 20px;
+            }
+
+            .name {
+                font-size: 2em;
+            }
+
+            .main-content {
+                padding: 30px 20px;
+            }
+
+            .contact-info span {
+                display: block;
+                margin: 5px 0;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .links-container {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-content">
+                <h1 class="name">MOHD SHABIHUL HASAN KHAN</h1>
+                <div class="contact-info">
+                    <span>📍 Gorakhpur, India 273015</span>
+                    <span>📱 +91 9336484347</span>
+                    <span>✉️ mohdshabihul@gmail.com</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="section">
+                <h2 class="section-title">PROFESSIONAL SUMMARY</h2>
+                <div class="summary">
+                    Blockchain Engineer specializing in smart contract development with expertise in Solidity, Ethereum, Rust, Solana, Anchor and Foundry. Proficient in building decentralized applications (dApps) and integrating blockchain protocols like Chainlink and ZKsync. Strong background in web development technology such as HTML, CSS, JavaScript, Typescript and Bootstrap. Passionate about leveraging blockchain technology to build secure and efficient decentralized solutions.
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">PROFESSIONAL EXPERIENCE</h2>
+                <div class="experience-item">
+                    <div class="job-title">Smart Contract Developer and Security Researcher</div>
+                    <div class="company-date">Cyfrin Updraft • June 2024 - Present</div>
+                    <div class="job-description">
+                        <p>Developing and auditing smart contracts with focus on security and optimization.</p>
+                    </div>
+                </div>
+                <div class="experience-item">
+                    <div class="job-title">Panel Sales Manager</div>
+                    <div class="company-date">MakeYourFunction • September 2017 - July 2019</div>
+                    <div class="job-description">
+                        <ul>
+                            <li>Managed sales pipeline efficiently, ensuring consistent flow of business and meeting of sales objectives</li>
+                            <li>Developed and maintained client relationships to drive revenue growth</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">TECHNICAL SKILLS</h2>
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <h4>Blockchain Development</h4>
+                        <ul>
+                            <li>Solidity</li>
+                            <li>Rust</li>
+                            <li>Foundry</li>
+                            <li>Anchor</li>
+                            <li>Ethereum</li>
+                            <li>Solana</li>
+                            <li>EVM</li>
+                        </ul>
+                    </div>
+                    <div class="skill-category">
+                        <h4>Smart Contract Tools</h4>
+                        <ul>
+                            <li>OpenZeppelin Contracts</li>
+                            <li>Chainlink Protocols</li>
+                            <li>ZKsync</li>
+                            <li>Remix</li>
+                            <li>Ganache</li>
+                            <li>Echidna</li>
+                        </ul>
+                    </div>
+                    <div class="skill-category">
+                        <h4>Web Development</h4>
+                        <ul>
+                            <li>HTML</li>
+                            <li>CSS</li>
+                            <li>JavaScript</li>
+                            <li>TypeScript</li>
+                            <li>Bootstrap</li>
+                            <li>React.js</li>
+                            <li>Node.js</li>
+                        </ul>
+                    </div>
+                    <div class="skill-category">
+                        <h4>Development Tools & Concepts</h4>
+                        <ul>
+                            <li>DeFi Concepts</li>
+                            <li>Git & GitHub</li>
+                            <li>Problem Solving</li>
+                            <li>Attention to Detail</li>
+                            <li>Time Management</li>
+                            <li>Strong Analytical Skills</li>
+                            <li>Communication Skills</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">CERTIFICATIONS</h2>
+                <div class="certification-item">
+                    <div class="cert-title">Chainlink Blockchain Fundamentals Certification</div>
+                    <a href="https://www.credly.com/badges/369738af-a754-4db4-abbe-fda636de8cae/public_url" class="cert-link" target="_blank">View Certificate</a>
+                </div>
+                <div class="certification-item">
+                    <div class="cert-title">Cyfrin Updraft - Solidity Smart Contract Development</div>
+                    <a href="https://profiles.cyfrin.io/u/shabihethsec/achievements/advanced-foundry" class="cert-link" target="_blank">View Certificate</a>
+                </div>
+                <div class="certification-item">
+                    <div class="cert-title">Cyfrin Updraft - Blockchain Basics</div>
+                    <a href="https://updraft.cyfrin.io/courses/blockchain-basics/final/proficiency-exam" class="cert-link" target="_blank">View Certificate</a>
+                </div>
+                <div class="certification-item">
+                    <div class="cert-title">Linux Certification</div>
+                    <a href="https://www.testdome.com/certificates/538e99e04b7e4e33bfa25a74486d5ca7" class="cert-link" target="_blank">View Certificate</a>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">EDUCATION</h2>
+                <div class="education-item">
+                    <div class="degree">Bachelor of Technology (B.Tech)</div>
+                    <div class="college">BBD Engineering College</div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">KEY PROJECTS</h2>
+                <div class="projects-grid">
+                    <div class="project-item">
+                        <div class="project-name">Feastify Food App</div>
+                        <div class="project-tech">HTML, CSS, JavaScript, Bootstrap</div>
+                    </div>
+                    <div class="project-item">
+                        <div class="project-name">CrowdFunding App</div>
+                        <div class="project-tech">Solidity, Chainlink Oracles, EVM, Foundry</div>
+                    </div>
+                    <div class="project-item">
+                        <div class="project-name">Stablecoin Protocol</div>
+                        <div class="project-tech">Solidity, OpenZeppelin, Chainlink, Foundry</div>
+                    </div>
+                    <div class="project-item">
+                        <div class="project-name">Upgradeable Proxy Contracts</div>
+                        <div class="project-tech">Solidity, OpenZeppelin, Chainlink, Foundry</div>
+                    </div>
+                    <div class="project-item">
+                        <div class="project-name">Cross Chain Rebase Token</div>
+                        <div class="project-tech">Solidity, OpenZeppelin, Chainlink, Foundry</div>
+                    </div>
+                    <div class="project-item">
+                        <div class="project-name">Merkle Airdrops</div>
+                        <div class="project-tech">Solidity, OpenZeppelin, Chainlink, Foundry, Signature Verification</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">PROFESSIONAL LINKS</h2>
+                <div class="links-container">
+                    <a href="https://www.linkedin.com/in/mohd-shabihul-hasan-khan-498577174/" class="link-item" target="_blank">LinkedIn Profile</a>
+                    <a href="https://github.com/ShabihEthSec" class="link-item" target="_blank">GitHub Repository</a>
+                    <a href="https://shabihethsec.github.io/Portfolio/" class="link-item" target="_blank">Portfolio Website</a>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">LANGUAGES</h2>
+                <div class="language-item">
+                    <strong>English:</strong> B2 (Upper Intermediate)
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
