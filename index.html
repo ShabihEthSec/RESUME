@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mohd Shabihul Hasan Khan - CV</title>
+    <!-- Add html2pdf library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -27,6 +29,64 @@
             border-radius: 15px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
             overflow: hidden;
+        }
+
+        /* PDF Download Button Styles */
+        .pdf-download-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(231, 76, 60, 0.3);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .pdf-download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(231, 76, 60, 0.4);
+            background: linear-gradient(135deg, #c0392b 0%, #a93226 100%);
+        }
+
+        .pdf-download-btn:active {
+            transform: translateY(0);
+        }
+
+        .pdf-download-btn .icon {
+            font-size: 18px;
+        }
+
+        /* Loading state for button */
+        .pdf-download-btn.loading {
+            background: #95a5a6;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        .pdf-download-btn.loading::after {
+            content: '';
+            width: 16px;
+            height: 16px;
+            border: 2px solid #ffffff;
+            border-top: 2px solid transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-left: 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         .header {
@@ -273,6 +333,24 @@
             text-align: center;
         }
 
+        /* PDF-specific styles - these will be applied when generating PDF */
+        @media print {
+            body {
+                background: white !important;
+                padding: 0 !important;
+            }
+            
+            .container {
+                box-shadow: none !important;
+                border-radius: 0 !important;
+                max-width: none !important;
+            }
+            
+            .pdf-download-btn {
+                display: none !important;
+            }
+        }
+
         @media (max-width: 768px) {
             .container {
                 margin: 10px;
@@ -307,11 +385,24 @@
             .links-container {
                 flex-direction: column;
             }
+
+            .pdf-download-btn {
+                top: 10px;
+                right: 10px;
+                padding: 12px 20px;
+                font-size: 14px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
+    <!-- PDF Download Button -->
+    <button class="pdf-download-btn" onclick="downloadPDF()">
+        <span class="icon">📄</span>
+        <span class="text">Download PDF</span>
+    </button>
+
+    <div class="container" id="cv-content">
         <div class="header">
             <div class="header-content">
                 <h1 class="name">MOHD SHABIHUL HASAN KHAN</h1>
@@ -480,5 +571,118 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function downloadPDF() {
+            const button = document.querySelector('.pdf-download-btn');
+            const buttonText = button.querySelector('.text');
+            const originalText = buttonText.textContent;
+            
+            // Add loading state
+            button.classList.add('loading');
+            buttonText.textContent = 'Generating PDF...';
+            
+            // Get the CV content element
+            const element = document.getElementById('cv-content');
+            
+            // Configure the PDF options
+            const opt = {
+                margin: [10, 10, 10, 10], // top, right, bottom, left margins in mm
+                filename: 'Mohd_Shabihul_Hasan_Khan_CV.pdf',
+                image: { 
+                    type: 'jpeg', 
+                    quality: 0.98 
+                },
+                html2canvas: { 
+                    scale: 2,
+                    useCORS: true,
+                    letterRendering: true,
+                    allowTaint: true
+                },
+                jsPDF: { 
+                    unit: 'mm', 
+                    format: 'a4', 
+                    orientation: 'portrait',
+                    compress: true
+                },
+                pagebreak: { 
+                    mode: ['avoid-all', 'css', 'legacy'] 
+                }
+            };
+            
+            // Generate and download the PDF
+            html2pdf().set(opt).from(element).save().then(function() {
+                // Remove loading state
+                button.classList.remove('loading');
+                buttonText.textContent = originalText;
+                
+                // Optional: Show success message
+                showNotification('PDF downloaded successfully!', 'success');
+            }).catch(function(error) {
+                console.error('Error generating PDF:', error);
+                
+                // Remove loading state
+                button.classList.remove('loading');
+                buttonText.textContent = originalText;
+                
+                // Show error message
+                showNotification('Failed to generate PDF. Please try again.', 'error');
+            });
+        }
+        
+        // Optional: Function to show notifications
+        function showNotification(message, type) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 80px;
+                right: 20px;
+                background: ${type === 'success' ? '#27ae60' : '#e74c3c'};
+                color: white;
+                padding: 15px 20px;
+                border-radius: 5px;
+                z-index: 1001;
+                font-weight: 500;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                animation: slideIn 0.3s ease-out;
+            `;
+            notification.textContent = message;
+            
+            // Add slide-in animation
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes slideIn {
+                    from {
+                        transform: translateX(100%);
+                        opacity: 0;
+                    }
+                    to {
+                        transform: translateX(0);
+                        opacity: 1;
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+            
+            document.body.appendChild(notification);
+            
+            // Remove notification after 3 seconds
+            setTimeout(() => {
+                notification.style.animation = 'slideIn 0.3s ease-out reverse';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                    document.head.removeChild(style);
+                }, 300);
+            }, 3000);
+        }
+        
+        // Optional: Add keyboard shortcut (Ctrl+P or Cmd+P)
+        document.addEventListener('keydown', function(e) {
+            if ((e.ctrlKey || e.metaKey) && e.key === 'p') {
+                e.preventDefault();
+                downloadPDF();
+            }
+        });
+    </script>
 </body>
 </html>
